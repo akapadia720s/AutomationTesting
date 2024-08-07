@@ -82,6 +82,11 @@ test('change password', async ({ page }) => {
 
   //check if signed in, if not sign in with valid user credentials
 
+  //assume user is signed in
+  await page.locator("(//a[contains(text(),'Sign In')])[1]").click();
+  await page.locator("(//input[@id='email'])[1]").type("ameenkapadia1@gmail.com")
+  await page.locator("(//input[@id='pass'])[1]").type("Desk2018$")
+
   //view account
   await page.locator("(//button[@type='button'])[1]").click();
   await page.locator("(//a[normalize-space()='My Account'])[1]").click();
