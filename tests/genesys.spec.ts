@@ -1,21 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
 
 //test case 1: Finding broken iamges
 test('Find Broken Images', async ({ page }) => {
@@ -89,50 +73,8 @@ test('Signing into an Account', async ({ page }) => {
 
 })
 
-//test case 4: adding clothes to cart
-
-test('Generic shopping test', async ({ page }) => {
-
-  //load page and wait for its content
-  await page.goto("https://magento.softwaretestingboard.com/");
-  await page.waitForTimeout(2000);
-  //navigating to mens clothigs page
-  await page.locator("(//span[@class='ui-menu-icon ui-icon ui-icon-carat-1-e'])[4]").hover();
-  await page.locator("(//a[@id='ui-id-17'])[1]").hover();
-  await page.locator("(//span[contains(text(),'Jackets')])[2]").click();
-  await page.waitForTimeout(2000);
-
-  //selecting and adding item to cart
-  await page.locator("(//div[@id='option-label-size-143-item-170'])[1]").click();
-  await page.locator("(//div[@id='option-label-color-93-item-50'])[1]").click();
-  await page.locator("(//span[contains(text(),'Add to Cart')])[1]").click();
-  await page.waitForTimeout(2000);
-  
-  //view cart
-  await page.locator("(//a[@class='action showcart'])[1]").click();
-  await page.locator("(//span[normalize-space()='View and Edit Cart'])[1]").click();
-  await page.waitForTimeout(2000);
-  
-  //ensure that subtotal and cart total match each other
-  //add new mens item and ensure that total is updated properly
-})
-
-//test case 5: using search box 
-test('searching for clothes', async ({ page }) => {
-
-  //load page and wait for its content
-  await page.goto("https://magento.softwaretestingboard.com/");
-  await page.waitForTimeout(2000);
-
-  //entering into search input
-  await page.locator("(//input[@id='search'])[1]").type("women's tee");
-  await page.keyboard.press("Enter");
-  //check for items to be loaded onto page, only consisting of women's tees
- 
-})
-
-//test case 6: change password 
-test('advanced search feature', async ({ page }) => {
+//test case 4: change password 
+test('change password', async ({ page }) => {
 
   //load page and wait for its content
   await page.goto("https://magento.softwaretestingboard.com/");
@@ -160,7 +102,54 @@ test('advanced search feature', async ({ page }) => {
   await page.locator("(//input[@id='pass'])[1]").type("test12242#W")
   await page.locator("(//button[@id='send2'])[1]").click();
 
+})
+
+//test case 5: adding clothes to cart
+
+test('add to cart', async ({ page }) => {
+
+  //load page and wait for its content
+  await page.goto("https://magento.softwaretestingboard.com/");
+  await page.waitForTimeout(2000);
+  //navigating to mens clothigs page
+  await page.locator("(//span[@class='ui-menu-icon ui-icon ui-icon-carat-1-e'])[4]").hover();
+  await page.locator("(//a[@id='ui-id-17'])[1]").hover();
+  await page.locator("(//span[contains(text(),'Jackets')])[2]").click();
+  await page.waitForTimeout(2000);
+
+  //selecting and adding item to cart
+  await page.locator("(//div[@id='option-label-size-143-item-170'])[1]").click();
+  await page.locator("(//div[@id='option-label-color-93-item-50'])[1]").click();
+  await page.locator("(//span[contains(text(),'Add to Cart')])[1]").click();
+  await page.waitForTimeout(2000);
   
+  //view cart
+  await page.locator("(//a[@class='action showcart'])[1]").click();
+  await page.locator("(//span[normalize-space()='View and Edit Cart'])[1]").click();
+  await page.waitForTimeout(2000);
   
+  //ensure that subtotal and cart total match each other
+  //add new mens item and ensure that total is updated properly
+})
+
+//test case 6: using search box 
+test('searching for clothes', async ({ page }) => {
+
+  //load page and wait for its content
+  await page.goto("https://magento.softwaretestingboard.com/");
+  await page.waitForTimeout(2000);
+
+  //entering into search input
+  await page.locator("(//input[@id='search'])[1]").type("women's tee");
+  await page.keyboard.press("Enter");
+  //check for items to be loaded onto page, only consisting of women's t shirts or related items
  
 })
+
+
+
+//FUTURE TESTS
+
+//test case 7: only display clothes based on gender searched (search mens -> only mens clothing)
+//test case 8: advanced search feature
+//test case 9: ensure pricing changes upon quantity increase in view cart display mode
